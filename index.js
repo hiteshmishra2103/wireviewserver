@@ -505,7 +505,7 @@ if (mongoose.connection.readyState == 0) {
   // 0 = disconnected
   async function handlerfunction() {
     await mongoose.connect(
-      "mongodb+srv://hitesh:user123@cluster0.uc2w8vk.mongodb.net/",
+      process.env.MONGO_URL,
       {
         useNewUrlParser: true,
         useUnifiedTopology: true,
