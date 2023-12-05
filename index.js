@@ -392,8 +392,8 @@ app.post("/create-checkout-session", authenticateJwt, async (req, res) => {
       payment_method_types: ["card"],
       line_items,
       mode: "payment",
-      success_url: `https://wireview-frontend-p335kthr4-hiteshmishra2103s-projects.vercel.app//success`,
-      cancel_url: `https://wireview-frontend-p335kthr4-hiteshmishra2103s-projects.vercel.app//cancel`,
+      success_url: `https://wireview-frontend1.vercel.app/success`,
+      cancel_url: `https://wireview-frontend1.vercel.app/cancel`,
     });
 
     const newOrder = new Orders({
