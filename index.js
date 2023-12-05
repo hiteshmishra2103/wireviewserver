@@ -368,7 +368,7 @@ app.post("/purchase", authenticateJwt, async (req, res) => {
   }
 });
 
-app.post("/create-checkout-session", authenticateJwt, async (req, res) => {
+app.post("/create-checkout-session", app.use(cors()),authenticateJwt, async (req, res) => {
   try {
     const user = await User.findOne({ username: req.user.username });
     if (!user) {
