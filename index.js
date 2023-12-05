@@ -11,7 +11,7 @@ const { statSync, readSync } = require("fs");
 app.use(express.static("public"));
 const dotenv = require("dotenv").config();
 const JWT_SECRET = process.env.JWT_SECRET;
-const stripeSecretKey = process.env.STRIPE_SECRET_KEY;
+const stripeSecretKey = process.env.STRIPE_KEY;
 
 const stripe = require("stripe")(stripeSecretKey);
 
@@ -368,7 +368,7 @@ app.post("/purchase", authenticateJwt, async (req, res) => {
   }
 });
 
-app.post("/create-checkout-session",authenticateJwt, async (req, res) => {
+app.post("/create-checkout-session", authenticateJwt, async (req, res) => {
   try {
     const user = await User.findOne({ username: req.user.username });
     if (!user) {
@@ -504,14 +504,11 @@ app.use((req, res, next) => {
 if (mongoose.connection.readyState == 0) {
   // 0 = disconnected
   async function handlerfunction() {
-    await mongoose.connect(
-      process.env.MONGO_URL,
-      {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-        dbName: "wireviewdb",
-      }
-    );
+    await mongoose.connect(process.env.MONGO_URL, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+      dbName: "wireviewdb",
+    });
   }
 
   handlerfunction();
