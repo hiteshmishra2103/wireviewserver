@@ -6,7 +6,7 @@ const path = require("path");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const { authenticate, authenticateJwt } = require("./middleware/auth");
-const { User, Products, Orders, Cart, ProductDetails } = require("./db/db");
+const { User, Products, Orders, Cart } = require("./db/db");
 const { statSync, readSync } = require("fs");
 app.use(express.static("public"));
 const dotenv = require("dotenv").config();
@@ -19,10 +19,6 @@ app.use(cors());
 app.use(express.json());
 app.get("/search", async (req, res) => {
   const q = req.query.q;
-
-  if (q.length < 3) {
-    return res.json([]);
-  }
 
   try {
     const products = await Products.find({
@@ -163,7 +159,6 @@ app.get("/cartQuantity", authenticateJwt, async (req, res) => {
   }
 });
 
-//create a route for deleting a product from the cart
 app.delete("/deleteFromCart/:productId", authenticateJwt, async (req, res) => {
   try {
     const productId = new mongoose.Types.ObjectId(req.params.productId);
@@ -302,6 +297,59 @@ app.post("/addproduct", authenticateJwt, async (req, res) => {
   }
 });
 
+app.put("/updateproduct/:id", authenticateJwt, async (req, res) => {
+  try {
+    const user = await User.findOne({ username: req.user.username });
+    if (!user) {
+      console.log("User does not exist");
+      return res.status(403).json({ message: "User does not exist" });
+    }
+    if (!user.isAdmin) {
+      console.log("You are not an admin!");
+      return res.status(403).json({ message: "You are not an admin!" });
+    }
+
+    const {
+      productName,
+      productDescription,
+      productPrice,
+      productCategory,
+      productColor,
+      productQuantity,
+      productMediaUrl,
+      thUrl,
+      published,
+    } = req.body;
+
+    const product = await Products.findById(req.params.id);
+
+    if (!product) {
+      return res.status(404).json({ message: "Product not found" });
+    }
+
+    product.name = productName;
+    product.description = productDescription;
+    product.price = productPrice;
+    product.category = productCategory;
+    product.color = productColor;
+    product.quantity = productQuantity;
+    product.mediaurl = productMediaUrl;
+    product.thumbnail = thUrl;
+    product.published = published;
+
+    const updatedProduct = await product.save();
+
+    res
+      .status(200)
+      .json({ updatedProduct, message: "Product updated successfully" });
+  } catch (error) {
+    console.log(error.message);
+    res
+      .status(500)
+      .json({ message: "An error occurred while updating the product" });
+  }
+});
+
 app.get("/products", async (req, res) => {
   const products = await Products.find({ published: true });
   console.log(products);
@@ -392,8 +440,8 @@ app.post("/create-checkout-session", authenticateJwt, async (req, res) => {
       payment_method_types: ["card"],
       line_items,
       mode: "payment",
-      success_url: `https://wireviewfrontend1.vercel.app//success`,
-      cancel_url: `https://wireviewfrontend1.vercel.app//cancel`,
+      success_url: `${process.env.URL}/success`,
+      cancel_url: `${process.env.URL}/cancel`,
     });
 
     const newOrder = new Orders({
@@ -449,7 +497,6 @@ app.get("/orders", authenticateJwt, async (req, res) => {
 });
 
 //create a route for updating the status of the order
-
 app.put("/updateOrderStatus/:orderId", authenticateJwt, async (req, res) => {
   try {
     const user = await User.findOne({ username: req.user.username });
