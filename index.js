@@ -15,7 +15,11 @@ const stripeSecretKey = process.env.STRIPE_KEY;
 
 const stripe = require("stripe")(stripeSecretKey);
 
-app.use(cors());
+app.use(cors(
+  {
+    origin: process.env.URL
+  }
+));
 app.use(express.json());
 app.get("/search", async (req, res) => {
   const q = req.query.q;
