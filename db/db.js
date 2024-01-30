@@ -80,9 +80,9 @@ const productSchema = new mongoose.Schema({
   color: String,
 });
 
-const productDetailsSchema = new mongoose.Schema({
-  productId: { type: mongoose.Schema.Types.ObjectId, ref: "Products" },
-});
+// const productDetailsSchema = new mongoose.Schema({
+//   productId: { type: mongoose.Schema.Types.ObjectId, ref: "Products" },
+// });
 
 const orderSchema = new mongoose.Schema({
   user: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
@@ -129,7 +129,7 @@ const User = mongoose.model("User", userSchema);
 const Products = mongoose.model("Products", productSchema);
 const Orders = mongoose.model("Orders", orderSchema);
 const Cart = mongoose.model("Cart", cartSchema);
-const ProductDetails = mongoose.model("ProductDetails", productDetailsSchema);
+// const ProductDetails = mongoose.model("ProductDetails", productDetailsSchema);
 // const OrderHistory = mongoose.model("OrderHistory", orderHistorySchema);
 
 module.exports = {
@@ -137,5 +137,4 @@ module.exports = {
   Products,
   Orders,
   Cart,
-  ProductDetails,
 };
