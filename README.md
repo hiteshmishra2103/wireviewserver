@@ -28,7 +28,7 @@ Before you begin, make sure you have the following installed:
 git clone https://github.com/your-username/wireviewserver.git
 ```
 
-2. 
+2. Navigate to the project directory
 ```bash
 cd wireviewserver
 ```
@@ -238,9 +238,6 @@ Adds a product to the user's cart.
 - `403 Forbidden`: User not found or product not found
 - `409 Conflict`: Product addition failed due to conflicts
 - `500 Internal Server Error`: Database errors or other unexpected issues
-
-
-//////////////
 
 
 ## Product Routes
