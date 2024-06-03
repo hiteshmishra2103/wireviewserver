@@ -18,11 +18,7 @@ const PORT = process.env.PORT || 3001;
 
 const stripe = require("stripe")(stripeSecretKey);
 
-app.use(cors(
-  {
-    origin: process.env.URL
-  }
-));
+app.use(cors());
 app.use(express.json());
 app.get("/search", async (req, res) => {
   const q = req.query.q;
