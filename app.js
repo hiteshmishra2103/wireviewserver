@@ -1,11 +1,6 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
-const path = require("path");
-const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
-const dotenv = require("dotenv").config();
-const { authenticateJwt } = require("./middleware/auth");
 const authRoutes = require("./routes/authRoutes");
 const cartRoutes = require("./routes/cartRoutes");
 const orderRoutes = require("./routes/orderRoutes");
@@ -16,7 +11,6 @@ const purchaseRoutes = require('./routes/purchaseRoutes');
 const stripeCheckoutRoutes = require("./routes/stripeCheckoutRoutes");
 
 const app = express();
-const stripeSecretKey = process.env.STRIPE_KEY;
 const PORT = process.env.PORT || 3001;
 
 // app.use(cors({ origin: process.env.URL }));
