@@ -1,6 +1,6 @@
 // stripeCheckoutController.js
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY); // Ensure you have your Stripe secret key stored in an environment variable
-const User = require('../models/User'); // Adjust the path as necessary
+const User = require('../models/Users'); // Adjust the path as necessary
 
 exports.stripeCheckout = async (req, res) => {
   try {
