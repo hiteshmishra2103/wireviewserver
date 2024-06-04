@@ -1,7 +1,9 @@
-const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY); // Ensure you have your Stripe secret key stored in an environment variable
-const User = require('../models/Users'); // Adjust the path as necessary
-const Orders = require('../models/Orders'); // Adjust the path as necessary
-const Cart = require('../models/Carts'); // Adjust the path as necessary
+// Description: This file contains the logic to handle the stripe checkout process.
+const User = require("../models/Users");
+const Orders = require("../models/Orders");
+const Cart = require("../models/Cart");
+const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
+
 
 exports.stripeCheckout = async (req, res) => {
   console.log('stripeCheckout initiated');
