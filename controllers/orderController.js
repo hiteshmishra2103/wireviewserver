@@ -1,5 +1,5 @@
-const User = require("../models/user");
-const Orders = require("../models/order");
+const User = require("../models/Users");
+const Orders = require("../models/Orders");
 const stripe = require("stripe")(process.env.STRIPE_KEY);
 
 const getOrders = async (req, res) => {

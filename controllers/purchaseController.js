@@ -1,7 +1,8 @@
-const User = require('../models/User'); 
-const Orders = require('../models/Orders'); 
 
-const purchaseProducts = async (req, res) => {      
+const User = require('../models/User');
+const Orders = require('../models/Orders');
+
+const purchaseProducts = async (req, res) => {
     try {
         const { products } = req.body;
 

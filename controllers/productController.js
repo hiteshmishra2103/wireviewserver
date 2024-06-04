@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
-const User = require("../models/user");
-const Products = require("../models/products");
+const User = require("../models/Users");
+const Products = require("../models/Products");
 
 // Add a new product (Admin only)
 exports.addProduct = async (req, res) => {
