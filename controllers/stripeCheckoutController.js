@@ -24,8 +24,8 @@ exports.stripeCheckout = async (req, res) => {
         quantity: item.quantity,
       })),
       mode: "payment",
-      success_url: "http://localhost:3000/checkout-success",
-      cancel_url: "http://localhost:3000/cart",
+      success_url: "https://wireview.vercel.app/success",
+      cancel_url: "https://wireview.vercel.app/cart",
     });
     res.json({ url: session.url });
   } catch (error) {

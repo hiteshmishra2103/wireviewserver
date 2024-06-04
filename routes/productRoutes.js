@@ -6,7 +6,7 @@ const router = express.Router();
 
 router.get("/", getAllProducts);
 router.get("/:productId", getProductById);
-router.post("/addProduct", authenticateJwt, addProduct);
+router.post("/add", authenticateJwt, addProduct);
 router.put("/updateProduct/:id", authenticateJwt, updateProduct);
 
 

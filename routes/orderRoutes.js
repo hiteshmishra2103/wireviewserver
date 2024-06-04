@@ -5,7 +5,7 @@ const { getOrders, checkout, updateOrderStatus, getOrderHistory } = require("../
 const router = express.Router();
 
 router.get("/", authenticateJwt, getOrders);
-router.post("/checkout", authenticateJwt, checkout);
+// router.post("/checkout", authenticateJwt, checkout);
 router.put("/:orderId", authenticateJwt, updateOrderStatus);
 router.get("/history", authenticateJwt, getOrderHistory);
 
