@@ -156,8 +156,6 @@ exports.searchProducts = async (req, res) => {
     }
 };
 
-const Products = require('./models/Products');
-const User = require('./models/User');
 
 
 
