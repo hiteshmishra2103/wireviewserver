@@ -9,6 +9,7 @@ const userRoutes = require("./routes/userRoutes");
 const categoryRoutes = require('./routes/categoryRoutes');
 const purchaseRoutes = require('./routes/purchaseRoutes');
 const stripeCheckoutRoutes = require("./routes/stripeCheckoutRoutes");
+const meRoutes = require("./routes/meRoutes");
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -19,6 +20,8 @@ app.use(express.json());
 app.use(express.static("public"));
 
 // Routes
+
+app.get("/me",meRoutes);
 app.use("/auth", authRoutes);
 app.use("/cart", cartRoutes);
 app.use("/orders", orderRoutes);
@@ -32,6 +35,8 @@ app.use("/create-checkout-session", stripeCheckoutRoutes);
 app.use((req, res, next) => {
   res.status(404).send("Not found");
 });
+
+
 
 if (mongoose.connection.readyState == 0) {
   async function handlerfunction() {

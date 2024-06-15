@@ -155,3 +155,9 @@ exports.searchProducts = async (req, res) => {
         res.status(500).json({ message: error.message });
     }
 };
+
+const Products = require('./models/Products');
+const User = require('./models/User');
+
+
+
