@@ -21,7 +21,7 @@ app.use(express.static("public"));
 
 // Routes
 
-app.get("/me",meRoutes);
+app.use("/me",meRoutes);
 app.use("/auth", authRoutes);
 app.use("/cart", cartRoutes);
 app.use("/orders", orderRoutes);
