@@ -8,6 +8,5 @@ router.get("/", getAllProducts);
 router.get("/:productId", getProductById);
 router.post("/add", authenticateJwt, addProduct);
 router.put("/updateProduct/:id", authenticateJwt, updateProduct);
-router.get("/search", searchProducts);
 
 module.exports = router;

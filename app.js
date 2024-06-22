@@ -10,6 +10,7 @@ const categoryRoutes = require('./routes/categoryRoutes');
 const purchaseRoutes = require('./routes/purchaseRoutes');
 const stripeCheckoutRoutes = require("./routes/stripeCheckoutRoutes");
 const meRoutes = require("./routes/meRoutes");
+const searchRoutes = require("./routes/searchRoutes");
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -21,11 +22,12 @@ app.use(express.static("public"));
 
 // Routes
 
-app.use("/me",meRoutes);
+app.use("/me", meRoutes);
 app.use("/auth", authRoutes);
 app.use("/cart", cartRoutes);
 app.use("/orders", orderRoutes);
 app.use("/products", productRoutes);
+app.use("/search", searchRoutes);
 app.use("/user", userRoutes);
 app.use('/purchase', purchaseRoutes)
 app.use('/category', categoryRoutes);
